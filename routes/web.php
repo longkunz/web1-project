@@ -26,6 +26,7 @@ Route::group(['prefix' => '/user'], function () {
     Route::post('/login', [UserController::class, 'userLoginSubmit'])->name('user.login.submit');
     Route::get('/register', [UserController::class, 'userRegister'])->name('user.register');
     Route::post('/register', [UserController::class, 'userRegisterSubmit'])->name('user.register.submit');
+    Route::get('/logout', [UserController::class, 'userLogout'])->name('user.logout');
 });
 /*---------------------User route group end-----------------------*/
 

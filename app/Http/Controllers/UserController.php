@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    //User logout
+    public function userLogout()
+    {
+        Session::forget('user');
+        Auth::logout();
+        request()->session()->flash('success', 'Logout successfully');
+        return back();
+    }
     //Handle user register submit
     public function userRegisterSubmit(Request $request)
     {

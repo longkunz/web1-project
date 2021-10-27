@@ -54,18 +54,26 @@
                     </div>
                     <div class="hearer_icon d-flex">
                         <a id="search_1" href="javascript:void(0)"><i class="ti ti-search"></i></a>
+                        @isset(Auth::user()->id)
                         <a href=""><i class="ti ti-heart"></i></a>
                         <div class="dropdown cart">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cart-plus"></i>
+                            <a class="dropdown-toggle" href="{{route('cart.index')}}">
+                                <i class="fas fa-cart-plus"><span>@php
+                                        echo App\Models\Cart::cartCount();
+                                        @endphp</span></i>
                             </a>
-                            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> -->
-
                         </div>
+                        <a href="{{route('user.logout')}}"><i class="fas fa-sign-out-alt"></i></a>
+                        @else
+                        <a href="{{route('user.login')}}"><i class="ti ti-heart"></i></a>
+                        <div class="dropdown cart">
+                            <a class="dropdown-toggle" href="{{route('cart.index')}}">
+                                <i class="fas fa-cart-plus"><span>0</span></i>
+                            </a>
+                        </div>
+                        <a href="{{route('user.login')}}"><i class="ti ti-user"></i></a>
+                        @endisset
+
                     </div>
                 </nav>
             </div>

@@ -39,7 +39,7 @@
 
                     @isset($products)
                     @foreach ($products as $product)
-                    <div class="col-lg-4 col-sm-6">
+                    <div class="col-md-4 col-lg-4 col-sm-6">
                         <div class="single_product_item">
                             <a href="{{route('product.detail',$product->slug)}}"><img src="{{$product->photo}}" alt="{{$product->title}}"></a>
                             <div class="single_product_text">

@@ -11,7 +11,7 @@ class PageController extends Controller
     //Show list product
     public function listProducts()
     {
-        $products = Product::paginate(2);
+        $products = Product::paginate(4);
         return view('page.products')->with('products',$products); 
     }
     //get product detail by slug

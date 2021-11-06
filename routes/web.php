@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
@@ -29,6 +30,16 @@ Route::group(['prefix' => '/user'], function () {
     Route::get('/logout', [UserController::class, 'userLogout'])->name('user.logout');
 });
 /*---------------------User route group end-----------------------*/
+
+
+/*---------------------Admin route group start---------------------*/
+Route::group(['prefix' => '/admin'], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+});
+/*---------------------Admin route group end-----------------------*/
+
+
+
 
 //Add new product
 //Route::resource('product', ProductController::class);

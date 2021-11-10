@@ -2,22 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserController extends Controller
 {
+    //User logout
+    public function userLogout()
+    {
+        Session::forget('user');
+        Auth::logout();
+        request()->session()->flash('success', 'Logout successfully');
+        return back();
+    }
     //Handle user register submit
     public function userRegisterSubmit(Request $request)
     {
         $this->validate($request, [
-            'name' => 'string|required|min:2',
-            'email' => 'string|required|unique',
-            'password' => 'required|min:6|confirmed',
+            'name' => 'string|required',
+            'email' => 'string|required|unique:users',
+            'password' => 'required|min:6',
         ]);
         $data = $request->all();
-        $check = $this->create($data);
+        $check = $this->createUser($data);
         $check->save();
         if ($check) {
             request()->session()->flash('success', 'Successfully registered!Please login!');
@@ -26,6 +37,16 @@ class UserController extends Controller
             request()->session()->flash('error', 'Please try again!');
             return back();
         }
+    }
+    //Create user
+    public function createUser(array $data)
+    {
+        return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'status' => 'active'
+        ]);
     }
     //Show register page
     public function userRegister()

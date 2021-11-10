@@ -1,9 +1,10 @@
+<div>@include('partial.notification')</div>
 <header class="main_menu home_menu">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="navbar-brand" href="{{route('index')}}"> <img src="{{url('img/logo.png')}}" alt="logo" style="max-width: 50%;"> </a>
+                    <a class="navbar-brand" href="{{route('index')}}"> <img src="{{url('img/logo.png')}}" alt="logo" style="max-width: 35%;"> </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="menu_icon"><i class="fas fa-bars"></i></span>
                     </button>
@@ -18,7 +19,7 @@
                                     Shop
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="category.html"> shop category</a>
+                                    <a class="dropdown-item" href="{{route('product.list')}}"> products list</a>
                                     <a class="dropdown-item" href="single-product.html">product details</a>
 
                                 </div>
@@ -38,11 +39,11 @@
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    blog
+                                    actions
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="blog.html"> blog</a>
-                                    <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                    <a class="dropdown-item" href="{{route('user.login')}}"> login</a>
+                                    <a class="dropdown-item" href="{{route('user.register')}}">register</a>
                                 </div>
                             </li>
 
@@ -53,18 +54,26 @@
                     </div>
                     <div class="hearer_icon d-flex">
                         <a id="search_1" href="javascript:void(0)"><i class="ti ti-search"></i></a>
+                        @isset(Auth::user()->id)
                         <a href=""><i class="ti ti-heart"></i></a>
                         <div class="dropdown cart">
-                            <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-cart-plus"></i>
+                            <a class="dropdown-toggle" href="{{route('cart.index')}}">
+                                <i class="fas fa-cart-plus"><span>@php
+                                        echo App\Models\Cart::cartCount();
+                                        @endphp</span></i>
                             </a>
-                            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <div class="single_product">
-    
-                                    </div>
-                                </div> -->
-
                         </div>
+                        <a href="{{route('user.logout')}}"><i class="fas fa-sign-out-alt"></i></a>
+                        @else
+                        <a href="{{route('user.login')}}"><i class="ti ti-heart"></i></a>
+                        <div class="dropdown cart">
+                            <a class="dropdown-toggle" href="{{route('cart.index')}}">
+                                <i class="fas fa-cart-plus"><span>0</span></i>
+                            </a>
+                        </div>
+                        <a href="{{route('user.login')}}"><i class="ti ti-user"></i></a>
+                        @endisset
+
                     </div>
                 </nav>
             </div>

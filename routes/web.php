@@ -33,9 +33,9 @@ Route::group(['prefix' => '/user'], function () {
 //Add new product
 //Route::resource('product', ProductController::class);
 //Show product detail
-Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
+Route::get('/product/{slug}', [ProductController::class, 'productDetail'])->name('product.detail');
 //Show list all products
-Route::get('/products', [PageController::class, 'listProducts'])->name('product.list');
+Route::get('/products', [ProductController::class, 'listProducts'])->name('product.list');
 //Cart
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('cart/add/{slug}', [CartController::class, 'addToCart'])->name('cart.add');

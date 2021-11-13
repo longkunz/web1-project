@@ -20,12 +20,10 @@ class CreateProductsTable extends Migration
             $table->text('summary');
             $table->longText('description')->nullable();
             $table->text('photo');
-            $table->integer('stock')->default(1);
-            $table->enum('condition', ['new', 'hot'])->default('new');
+            $table->integer('stock')->default(0);
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->integer('price');
             $table->string('size');
-            $table->string('feature');
             $table->timestamps();
         });
     }

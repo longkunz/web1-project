@@ -5,9 +5,30 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use app\Models\Product;
+use App\Repositories\ProductRepository;
 
 class ProductController extends Controller
 {
+    //Construct
+    protected $productRepository;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->productRepository = $productRepository;
+    }
+    //Show list product
+    public function listProducts()
+    {
+        $products = $this->productRepository->getProducts(6);
+        return view('page.products')->with('products', $products);
+    }
+    //get product detail by slug
+    public function productDetail($slug)
+    {
+        $product = $this->productRepository->getProductDetail($slug);
+        return view('page.product')->with('product', $product);
+    }
+
     /**
      * Display a listing of the resource.
      *

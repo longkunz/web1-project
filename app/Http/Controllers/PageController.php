@@ -14,4 +14,13 @@ class PageController extends Controller
         $products = Product::orderBy('id', 'DESC')->get();
         return view('index')->with('products', $products);
     }
+
+    public function getSearch(Request $req)
+    {
+        $product = Product::where('title', 'like','%'.$req->key.'%')
+        ->orwhere ('summary', $req->key)
+        ->get();
+
+        return view('page.search', compact('product'));
+    }
 }

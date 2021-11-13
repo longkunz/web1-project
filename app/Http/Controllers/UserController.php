@@ -7,10 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Repositories\UserRepository;
 
 
 class UserController extends Controller
 {
+    //Construct
+    protected $userRepository;
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
     //User logout
     public function userLogout()
     {
@@ -79,7 +86,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = $this->userRepository->getUsers(10);
+        return view('backend.users.index')->with('users', $users);
     }
 
     /**
@@ -89,7 +97,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('backend.users.create');
     }
 
     /**
@@ -100,7 +108,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate(
+            $request,
+            [
+                'name' => 'string|required|max:30',
+                'email' => 'string|required|unique:users',
+                'password' => 'string|required',
+                'role' => 'required|in:admin,user',
+                'status' => 'required|in:active,inactive',
+            ]
+        );
+        // dd($request->all());
+        $data = $request->all();
+        $data['password'] = Hash::make($request->password);
+        // dd($data);
+        $status = $this->userRepository->storeUser($data);
+        // dd($status);
+        if ($status) {
+            request()->session()->flash('success', 'Successfully added user');
+        } else {
+            request()->session()->flash('error', 'Error occurred while adding user');
+        }
+        return redirect()->route('users.index');
     }
 
     /**
@@ -122,7 +151,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = $this->userRepository->findUser($id);
+        return view('backend.users.edit')->with('user', $user);
     }
 
     /**
@@ -134,7 +164,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = $this->userRepository->findUser($id);
+        $this->validate(
+            $request,
+            [
+                'name' => 'string|required|max:30',
+                'email' => 'string|required',
+                'role' => 'required|in:admin,user',
+                'status' => 'required|in:active,inactive',
+                'photo' => 'nullable|string',
+            ]
+        );
+        // dd($request->all());
+        $data = $request->all();
+        // dd($data);
+        $user->role = $request->role;
+        $status = $user->fill($data)->save();
+        if ($status) {
+            request()->session()->flash('success', 'Successfully updated');
+        } else {
+            request()->session()->flash('error', 'Error occured while updating');
+        }
+        return redirect()->route('users.index');
     }
 
     /**
@@ -145,6 +196,13 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = $this->userRepository->findUser($id);
+        $status = $user->delete();
+        if ($status) {
+            request()->session()->flash('success', 'User Successfully deleted');
+        } else {
+            request()->session()->flash('error', 'There is an error while deleting users');
+        }
+        return redirect()->route('users.index');
     }
 }

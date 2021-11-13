@@ -34,7 +34,10 @@ Route::group(['prefix' => '/user'], function () {
 
 /*---------------------Admin route group start---------------------*/
 Route::group(['prefix' => '/admin'], function () {
+    //ADmin dashboard
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    // user route
+    Route::resource('users',UserController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 

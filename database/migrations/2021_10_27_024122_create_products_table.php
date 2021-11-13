@@ -24,6 +24,8 @@ class CreateProductsTable extends Migration
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->integer('price');
             $table->string('size');
+            $table->unsignedBigInteger('cat_id')->nullable();
+            $table->foreign('cat_id')->references('id')->on('categories')->onDelete('SET NULL');
             $table->timestamps();
         });
     }

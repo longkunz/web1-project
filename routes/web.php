@@ -41,6 +41,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('users', UserController::class);
     //Category
     Route::resource('category', CategoryController::class);
+    //Product
+    Route::resource('product', ProductController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 

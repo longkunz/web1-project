@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -37,7 +38,9 @@ Route::group(['prefix' => '/admin'], function () {
     //ADmin dashboard
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     // user route
-    Route::resource('users',UserController::class);
+    Route::resource('users', UserController::class);
+    //Category
+    Route::resource('category', CategoryController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+    protected $fillable=['name','slug','status'];
     //Lấy danh sách sản phẩm trong category
     public function products()
     {

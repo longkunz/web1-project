@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -43,6 +44,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('category', CategoryController::class);
     //Product
     Route::resource('product', ProductController::class);
+    //Order
+    Route::resource('order', OrderController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 

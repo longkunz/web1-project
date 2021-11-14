@@ -25,21 +25,6 @@
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Categories
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                @isset($categories)
-                                    @php
-                                        $categories1 = $categories->take(8);
-                                    @endphp
-                                    @foreach ($categories1 as $category)                        
-                                        <a class="dropdown-item" href="{{route('category',['id'=>$category->id])}}"> {{$category->name}}</a><br>
-                                    @endforeach
-                                @endisset
-                                </div>
-                            </li>
-                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     pages
                                 </a>

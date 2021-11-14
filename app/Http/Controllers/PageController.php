@@ -13,9 +13,7 @@ class PageController extends Controller
     public function index()
     {
         $products = Product::orderBy('id', 'DESC')->get();
-        $categories = Category::orderBy('id', 'DESC')->get();
-        return view('index')->with('products', $products)
-        ->with('categories', $categories);
+        return view('index')->with('products', $products);
     }
 
     public function getSearch(Request $req)
@@ -25,14 +23,5 @@ class PageController extends Controller
         ->get();
 
         return view('page.search', compact('product'));
-    }
-
-    public function category($cat_id)
-    {
-        $categories = Category::orderBy('name', 'ASC')->get();
-        $cate = Category::where('id', $cat_id)->first();
-        $product = Product::where('cat_id',$cate->id)->get();
-        return view('page.category')->with('categories', $cate)
-        ->with('products', $product);
     }
 }

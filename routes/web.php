@@ -55,6 +55,3 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 
 //Search
 Route::get('search', [PageController::class, 'getSearch'])->name('search');
-
-//Categories
-Route::get('category/{id}', [PageController::class, 'category'])->name('category');

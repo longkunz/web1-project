@@ -44,11 +44,14 @@ Route::group(['prefix' => '/admin'], function () {
 //Add new product
 //Route::resource('product', ProductController::class);
 //Show product detail
-Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
+Route::get('/product/{slug}', [ProductController::class, 'productDetail'])->name('product.detail');
 //Show list all products
-Route::get('/products', [PageController::class, 'listProducts'])->name('product.list');
+Route::get('/products', [ProductController::class, 'listProducts'])->name('product.list');
 //Cart
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('cart/add/{slug}', [CartController::class, 'addToCart'])->name('cart.add');
 Route::get('cart/remove/{id}', [CartController::class, 'removeCart'])->name('cart.remove');
 Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+
+//Search
+Route::get('search', [PageController::class, 'getSearch'])->name('search');

@@ -12,7 +12,7 @@ class CartRepository
     //Show cart
     public function showCart()
     {
-        return Cart::with('product')->where('user_id', Auth::user()->id)->orderBy('id', 'ASC')->paginate(15);
+        return Cart::with('product')->where('order_id', null)->where('user_id', Auth::user()->id)->orderBy('id', 'ASC')->paginate(15);
     }
 
     //Store item to cart

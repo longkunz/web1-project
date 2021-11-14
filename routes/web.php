@@ -66,3 +66,6 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 
 //Search
 Route::get('search', [PageController::class, 'getSearch'])->name('search');
+
+//Checkout
+Route::get('checkout', [PageController::class,'checkout'])->name('checkout');

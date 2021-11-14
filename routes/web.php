@@ -52,8 +52,7 @@ Route::group(['prefix' => '/admin'], function () {
 
 
 
-//Add new product
-//Route::resource('product', ProductController::class);
+
 //Show product detail
 Route::get('/product/{slug}', [ProductController::class, 'productDetail'])->name('product.detail');
 //Show list all products
@@ -68,4 +67,8 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 Route::get('search', [PageController::class, 'getSearch'])->name('search');
 
 //Checkout
-Route::get('checkout', [PageController::class,'checkout'])->name('checkout');
+Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
+
+
+//Category products
+Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');

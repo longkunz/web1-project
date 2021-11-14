@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\Product;
 
 class CategoryController extends Controller
 {
@@ -15,6 +16,14 @@ class CategoryController extends Controller
     public function __construct(CategoryRepository $catRepository)
     {
         $this->catRepository = $catRepository;
+    }
+
+    //Get product of category by slug
+    public function getProductByCatId($id)
+    {
+        $categories = Category::all();
+        $products = Product::where('cat_id', $id)->paginate(6);
+        return view('page.catproducts', ['products' => $products, 'categories' => $categories]);
     }
     /**
      * Display a listing of the resource.

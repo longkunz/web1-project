@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 use App\Repositories\ProductRepository;
 use App\Models\Category;
 use App\Models\Product;
+use App\Repositories\CategoryRepository;
+
 
 class ProductController extends Controller
 {
@@ -21,7 +23,9 @@ class ProductController extends Controller
     public function listProducts()
     {
         $products = $this->productRepository->getProducts(6);
-        return view('page.products')->with('products', $products);
+        $categories= Category::get();
+        return view('page.products')->with('products', $products)
+        ->with('categories',$categories);
     }
     //get product detail by slug
     public function productDetail($slug)

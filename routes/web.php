@@ -35,6 +35,9 @@ Route::group(['prefix' => '/user'], function () {
 /*---------------------Admin route group start---------------------*/
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+
+    //Product
+    Route::resource('product', ProductController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 
@@ -55,3 +58,5 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 
 //Search
 Route::get('search', [PageController::class, 'getSearch'])->name('search');
+
+

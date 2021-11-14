@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use app\Models\Product;
 use App\Repositories\ProductRepository;
+use App\Models\Category;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -36,7 +37,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = $this->productRepository->getProductWithCat(10);
+        return view('backend.product.index', compact('products', $products));
     }
 
     /**
@@ -46,7 +48,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $category = Category::get();
+        return view('backend.product.create')->with('categories', $category);
     }
 
     /**
@@ -65,10 +68,8 @@ class ProductController extends Controller
             'photo' => 'string|required',
             'stock' => "required|numeric",
             'status' => 'required|in:active,inactive',
-            'condition' => 'required|in:new,hot',
             'price' => 'required|numeric',
             'size' => 'string|nullable',
-            'feature' => 'string|nullable',
         ]);
         //Assign data
         $data = $request->all();
@@ -92,7 +93,7 @@ class ProductController extends Controller
         } else {
             request()->session()->flash('error', 'Please try again!!');
         }
-        return redirect()->back();
+        return redirect()->route('product.index');
     }
 
     /**
@@ -114,7 +115,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $category = Category::get();
+        // return $items;
+        return view('backend.product.edit')->with('product', $product)
+            ->with('categories', $category);
     }
 
     /**
@@ -126,7 +131,31 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        //Kiểm tra dữ liệu gửi về từ request
+        $this->validate($request, [
+            'title' => 'string|required',
+            'summary' => 'string|required',
+            'description' => 'string|nullable',
+            'photo' => 'string|required',
+            'stock' => "required|numeric",
+            'cat_id' => 'required|exists:categories,id',
+            'status' => 'required|in:active,inactive',
+            'price' => 'required|numeric',
+            'size' => 'string|nullable',
+        ]);
+        // //Gán dữ liệu
+        $data = $request->all();
+        //$data['is_featured'] = $request->input('is_featured', 0);
+        //Gọi phương thức update
+        $status = $product->fill($data)->save();
+        //Kiểm tra quá trình thêm product đã thành công hay chưa
+        if ($status) {
+            request()->session()->flash('success', 'Product Updated Successfully');
+        } else {
+            request()->session()->flash('error', 'Please try again!!');
+        }
+        return redirect()->route('product.index');
     }
 
     /**
@@ -137,6 +166,14 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $status = $product->delete();
+        //Kiểm tra quá trình thêm product đã thành công hay chưa
+        if ($status) {
+            request()->session()->flash('success', 'Product Deleted Successfully');
+        } else {
+            request()->session()->flash('error', 'Please try again!!');
+        }
+        return redirect()->route('product.index');
     }
 }

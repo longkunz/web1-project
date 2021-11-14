@@ -38,6 +38,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     // user route
     Route::resource('users',UserController::class);
+    //Category
+    Route::resource('category', CategoryController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 

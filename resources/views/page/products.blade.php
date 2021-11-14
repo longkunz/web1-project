@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="row align-items-center latest_product_inner">
-                    <!-- Show product list x9 -->
+                    <!-- Show product list x6 -->
 
                     @isset($products)
                     @foreach ($products as $product)
@@ -52,7 +52,7 @@
                     @endforeach
                     @endisset
 
-                    <!-- End show product list x9 -->
+                    <!-- End show product list x6 -->
                     <div class="col-lg-12">
                         {{$products->links('layouts.paginate')}}
                     </div>

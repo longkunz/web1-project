@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
@@ -30,12 +31,22 @@ Route::group(['prefix' => '/user'], function () {
 });
 /*---------------------User route group end-----------------------*/
 
+
+/*---------------------Admin route group start---------------------*/
+Route::group(['prefix' => '/admin'], function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+});
+/*---------------------Admin route group end-----------------------*/
+
+
+
+
 //Add new product
 //Route::resource('product', ProductController::class);
 //Show product detail
-Route::get('/product/{slug}', [PageController::class, 'productDetail'])->name('product.detail');
+Route::get('/product/{slug}', [ProductController::class, 'productDetail'])->name('product.detail');
 //Show list all products
-Route::get('/products', [PageController::class, 'listProducts'])->name('product.list');
+Route::get('/products', [ProductController::class, 'listProducts'])->name('product.list');
 //Cart
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('cart/add/{slug}', [CartController::class, 'addToCart'])->name('cart.add');

@@ -40,6 +40,10 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('product', ProductController::class);
     //Order
     Route::resource('order', OrderController::class);
+
+    // Settings
+    Route::get('setting', [AdminController::class,'settings'])->name('setting');
+    Route::post('setting/update', [AdminController::class,'settingsUpdate'])->name('setting.update');
 });
 /*---------------------Admin route group end-----------------------*/
 

@@ -5,8 +5,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +65,8 @@ Route::get('search', [PageController::class, 'getSearch'])->name('search');
 Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');
 //Checkout
 Route::get('checkout', [PageController::class,'checkout'])->name('checkout');
+
+//File manager
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    Lfm::routes();
+});

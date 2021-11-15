@@ -5,32 +5,15 @@
         </div>
         <div class="widgets_inner">
             <ul class="list">
+                @isset($categories)
+                @foreach ($categories as $item)
                 <li>
-                    <a href="#">Coming soon!</a>
-                    <span>(^_^)</span>
+                    <a href="{{route('catproducts',$item->id)}}">{{$item->name}}</a>
                 </li>
+                @endforeach
+                @endisset
+
             </ul>
-        </div>
-    </aside>
-    <aside class="left_widgets p_filter_widgets price_rangs_aside">
-        <div class="l_w_title">
-            <h3>Price Filter</h3>
-        </div>
-        <div class="widgets_inner">
-            <div class="range_item">
-                <!-- <div id="slider-range"></div> -->
-                <input type="text" class="js-range-slider" value="" />
-                <div class="d-flex">
-                    <div class="price_text">
-                        <p>Price :</p>
-                    </div>
-                    <div class="price_value d-flex justify-content-center">
-                        <input type="text" class="js-input-from" id="amount" readonly />
-                        <span>to</span>
-                        <input type="text" class="js-input-to" id="amount" readonly />
-                    </div>
-                </div>
-            </div>
         </div>
     </aside>
 </div>

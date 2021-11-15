@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -34,6 +35,7 @@ Route::group(['prefix' => '/user'], function () {
 
 /*---------------------Admin route group start---------------------*/
 Route::group(['prefix' => '/admin'], function () {
+    //ADmin dashboard
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
     //Product
@@ -44,6 +46,10 @@ Route::group(['prefix' => '/admin'], function () {
     // Settings
     Route::get('setting', [AdminController::class,'settings'])->name('setting');
     Route::post('setting/update', [AdminController::class,'settingsUpdate'])->name('setting.update');
+    // user route
+    Route::resource('users', UserController::class);
+    //Category
+    Route::resource('category', CategoryController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 

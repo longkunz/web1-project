@@ -27,4 +27,5 @@ class Category extends Model
         }
         return 0;
     }
+    protected $fillable=['name','slug','status'];
 }

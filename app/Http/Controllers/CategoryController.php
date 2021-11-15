@@ -10,7 +10,12 @@ use App\Models\Product;
 
 class CategoryController extends Controller
 {
-    
+    //Construct
+    protected $catRepository;
+    public function __construct(CategoryRepository $catRepository)
+    {
+        $this->catRepository = $catRepository;
+    }
     //Get product of category by slug
     public function getProductByCatId($id)
     {
@@ -18,6 +23,7 @@ class CategoryController extends Controller
         $products = Product::where('cat_id', $id)->paginate(6);
         return view('page.catproducts', ['products' => $products, 'categories' => $categories]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -79,7 +85,6 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
     }
 
     /**

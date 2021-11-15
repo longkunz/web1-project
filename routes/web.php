@@ -38,6 +38,8 @@ Route::group(['prefix' => '/admin'], function () {
 
     //Product
     Route::resource('product', ProductController::class);
+    //Order
+    Route::resource('order', OrderController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 
@@ -61,3 +63,5 @@ Route::get('search', [PageController::class, 'getSearch'])->name('search');
 
 //Category products
 Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');
+//Checkout
+Route::get('checkout', [PageController::class,'checkout'])->name('checkout');

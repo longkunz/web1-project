@@ -38,6 +38,8 @@ Route::group(['prefix' => '/admin'], function () {
 
     //Product
     Route::resource('product', ProductController::class);
+    //Order
+    Route::resource('order', OrderController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 
@@ -59,4 +61,5 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 //Search
 Route::get('search', [PageController::class, 'getSearch'])->name('search');
 
-
+//Checkout
+Route::get('checkout', [PageController::class,'checkout'])->name('checkout');

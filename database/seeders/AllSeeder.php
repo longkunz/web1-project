@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class CategorySeeder extends Seeder
+class AllSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +13,10 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->insert([
-            'name' => "Living Room",
-            'slug' => "living-room",
+        $this->call([
+            UserSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
         ]);
     }
 }

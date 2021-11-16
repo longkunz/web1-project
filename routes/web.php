@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
@@ -37,7 +38,6 @@ Route::group(['prefix' => '/user'], function () {
 Route::group(['prefix' => '/admin'], function () {
     //ADmin dashboard
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-
     //Product
     Route::resource('product', ProductController::class);
     //Order

@@ -42,7 +42,7 @@
                                     actions
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="{{route('user.login')}}"> login</a>
+                                    <a class="dropdown-item" href="{{route('login')}}"> login</a>
                                     <a class="dropdown-item" href="{{route('user.register')}}">register</a>
                                 </div>
                             </li>
@@ -65,13 +65,13 @@
                         </div>
                         <a href="{{route('user.logout')}}"><i class="fas fa-sign-out-alt"></i></a>
                         @else
-                        <a href="{{route('user.login')}}"><i class="ti ti-heart"></i></a>
+                        <a href="{{route('login')}}"><i class="ti ti-heart"></i></a>
                         <div class="dropdown cart">
                             <a class="dropdown-toggle" href="{{route('cart.index')}}">
                                 <i class="fas fa-cart-plus"><span>0</span></i>
                             </a>
                         </div>
-                        <a href="{{route('user.login')}}"><i class="ti ti-user"></i></a>
+                        <a href="{{route('login')}}"><i class="ti ti-user"></i></a>
                         @endisset
 
                     </div>

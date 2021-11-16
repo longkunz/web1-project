@@ -25,7 +25,7 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 
 /*---------------------User route group start---------------------*/
 Route::group(['prefix' => '/user'], function () {
-    Route::get('/login', [UserController::class, 'userLogin'])->name('user.login');
+    Route::get('/login', [UserController::class, 'userLogin'])->name('login');
     Route::post('/login', [UserController::class, 'userLoginSubmit'])->name('user.login.submit');
     Route::get('/register', [UserController::class, 'userRegister'])->name('user.register');
     Route::post('/register', [UserController::class, 'userRegisterSubmit'])->name('user.register.submit');
@@ -35,7 +35,7 @@ Route::group(['prefix' => '/user'], function () {
 
 
 /*---------------------Admin route group start---------------------*/
-Route::group(['prefix' => '/admin'], function () {
+Route::group(['prefix' => '/admin', 'middleware' => ['checkRole']], function () {
     //ADmin dashboard
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     //Product
@@ -75,9 +75,9 @@ Route::get('search', [PageController::class, 'getSearch'])->name('search');
 //Category products
 Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');
 //Checkout
-Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
+Route::get('checkout', [PageController::class, 'checkout'])->name('checkout')->middleware('checkLogin');
 
 //File manager
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['checkRole']], function () {
     Lfm::routes();
 });

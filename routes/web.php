@@ -42,14 +42,15 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('product', ProductController::class);
     //Order
     Route::resource('order', OrderController::class);
-
     // Settings
-    Route::get('setting', [AdminController::class,'settings'])->name('setting');
-    Route::post('setting/update', [AdminController::class,'settingsUpdate'])->name('setting.update');
+    Route::get('setting', [AdminController::class, 'settings'])->name('setting');
+    Route::post('setting/update', [AdminController::class, 'settingsUpdate'])->name('setting.update');
     // user route
     Route::resource('users', UserController::class);
     //Category
     Route::resource('category', CategoryController::class);
+    //Banner
+    Route::resource('banner', BannerController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 
@@ -74,7 +75,7 @@ Route::get('search', [PageController::class, 'getSearch'])->name('search');
 //Category products
 Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');
 //Checkout
-Route::get('checkout', [PageController::class,'checkout'])->name('checkout');
+Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
 
 //File manager
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {

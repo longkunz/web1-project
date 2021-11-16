@@ -2,11 +2,7 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-=======
 use App\Models\Banner;
-
->>>>>>> d9586df37e91cc585d95c2d4962fea5f00191192
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
@@ -18,12 +14,8 @@ class BannerController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        //
-=======
         $banner = Banner::orderBy('id', 'DESC')->paginate(10);
         return view('backend.banner.index')->with('banners', $banner);
->>>>>>> d9586df37e91cc585d95c2d4962fea5f00191192
     }
 
     /**
@@ -33,11 +25,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-<<<<<<< HEAD
-        //
-=======
         return view('backend.banner.create');
->>>>>>> d9586df37e91cc585d95c2d4962fea5f00191192
     }
 
     /**
@@ -48,9 +36,6 @@ class BannerController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
-        //
-=======
         $this->validate($request, [
             'title' => 'string|required|max:50',
             'description' => 'string|nullable',
@@ -69,7 +54,6 @@ class BannerController extends Controller
             request()->session()->flash('error', 'Error occurred while adding banner');
         }
         return redirect()->route('banner.index');
->>>>>>> d9586df37e91cc585d95c2d4962fea5f00191192
     }
 
     /**
@@ -91,13 +75,9 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
-        //
-=======
         $countActive = Banner::where('status', 'active')->count();
         $banner = Banner::findOrFail($id);
         return view('backend.banner.edit')->with('banner', $banner)->with('countActive', $countActive);
->>>>>>> d9586df37e91cc585d95c2d4962fea5f00191192
     }
 
     /**
@@ -109,9 +89,6 @@ class BannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-<<<<<<< HEAD
-        //
-=======
         $banner = Banner::findOrFail($id);
         $this->validate($request, [
             'title' => 'string|required|max:50',
@@ -129,7 +106,6 @@ class BannerController extends Controller
             request()->session()->flash('error', 'Error occurred while updating banner');
         }
         return redirect()->route('banner.index');
->>>>>>> d9586df37e91cc585d95c2d4962fea5f00191192
     }
 
     /**
@@ -140,11 +116,6 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-<<<<<<< HEAD
-        //
-    }
-}
-=======
         $banner = Banner::findOrFail($id);
         $status = $banner->delete();
         if ($status) {
@@ -155,4 +126,3 @@ class BannerController extends Controller
         return redirect()->route('banner.index');
     }
 }
->>>>>>> d9586df37e91cc585d95c2d4962fea5f00191192

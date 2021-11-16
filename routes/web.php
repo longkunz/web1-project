@@ -24,11 +24,23 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 
 /*---------------------User route group start---------------------*/
 Route::group(['prefix' => '/user'], function () {
+    //User Logout
+    Route::get('/logout', [PageController::class,'userLogout'])->name('user.logout');
     Route::get('/login', [UserController::class, 'userLogin'])->name('user.login');
     Route::post('/login', [UserController::class, 'userLoginSubmit'])->name('user.login.submit');
     Route::get('/register', [UserController::class, 'userRegister'])->name('user.register');
     Route::post('/register', [UserController::class, 'userRegisterSubmit'])->name('user.register.submit');
     Route::get('/logout', [UserController::class, 'userLogout'])->name('user.logout');
+    //Profile
+    Route::get('/profile', [PageController::class, 'userProfile'])->name('user.profile');
+    //User change password
+    Route::get('/changepassword', [PageController::class,'changeUserPassword'])->name('user.change.password');
+    Route::post('/changepassword/save', [PageController::class,'changPasswordStore'])->name('user.changepass.save');
+
+    //  Order
+    Route::get('/order', [PageController::class, 'orderIndex'])->name('user.order.index');
+    Route::get('/order/show/{id}', [PageController::class, 'orderShow'])->name('user.order.show');
+    Route::delete('/order/delete/{id}', [PageController::class, 'userOrderDelete'])->name('user.order.delete');
 });
 /*---------------------User route group end-----------------------*/
 
@@ -44,8 +56,8 @@ Route::group(['prefix' => '/admin'], function () {
     Route::resource('order', OrderController::class);
 
     // Settings
-    Route::get('setting', [AdminController::class,'settings'])->name('setting');
-    Route::post('setting/update', [AdminController::class,'settingsUpdate'])->name('setting.update');
+    Route::get('setting', [AdminController::class, 'settings'])->name('setting');
+    Route::post('setting/update', [AdminController::class, 'settingsUpdate'])->name('setting.update');
     // user route
     Route::resource('users', UserController::class);
     //Category
@@ -74,7 +86,7 @@ Route::get('search', [PageController::class, 'getSearch'])->name('search');
 //Category products
 Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');
 //Checkout
-Route::get('checkout', [PageController::class,'checkout'])->name('checkout');
+Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
 
 //File manager
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {

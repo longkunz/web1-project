@@ -75,17 +75,10 @@
 <script src="{{asset('/vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 <script>
-<<<<<<< HEAD
-var route_prefix = "{{url('/filemanager')}}";
-$('#lfm').filemanager('image', {
-    prefix: route_prefix
-});
-=======
   var route_prefix = "{{url('/filemanager')}}";
   $('#lfm').filemanager('image', {
     prefix: route_prefix
   });
->>>>>>> quyen/banner
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 @endpush

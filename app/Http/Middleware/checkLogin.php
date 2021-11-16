@@ -17,11 +17,11 @@ class checkLogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check()) {
-            return $next($request);
+        if (!Auth::check()) {
+            request()->session()->flash('error', 'Please login first!!!');
+            return redirect()->route('login');
         } else {
-            request()->session()->flash('error', 'You do not have any permission to access this page');
-            return route('user.login');
+            return $next($request);
         }
     }
 }

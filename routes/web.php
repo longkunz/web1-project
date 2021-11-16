@@ -24,7 +24,7 @@ Route::get('/', [PageController::class, 'index'])->name('index');
 
 /*---------------------User route group start---------------------*/
 Route::group(['prefix' => '/user'], function () {
-    Route::get('/login', [UserController::class, 'userLogin'])->name('user.login');
+    Route::get('/login', [UserController::class, 'userLogin'])->name('login');
     Route::post('/login', [UserController::class, 'userLoginSubmit'])->name('user.login.submit');
     Route::get('/register', [UserController::class, 'userRegister'])->name('user.register');
     Route::post('/register', [UserController::class, 'userRegisterSubmit'])->name('user.register.submit');
@@ -77,6 +77,6 @@ Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->n
 Route::get('checkout', [PageController::class, 'checkout'])->name('checkout')->middleware('checkLogin');
 
 //File manager
-Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'checkLogin']], function () {
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['checkRole']], function () {
     Lfm::routes();
 });

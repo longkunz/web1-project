@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
-use App\Models\Product;
 use Illuminate\Support\Facades\Route;
+use UniSharp\LaravelFilemanager\Lfm;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +35,21 @@ Route::group(['prefix' => '/user'], function () {
 
 /*---------------------Admin route group start---------------------*/
 Route::group(['prefix' => '/admin'], function () {
+    //ADmin dashboard
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
 
     //Product
     Route::resource('product', ProductController::class);
+    //Order
+    Route::resource('order', OrderController::class);
+
+    // Settings
+    Route::get('setting', [AdminController::class,'settings'])->name('setting');
+    Route::post('setting/update', [AdminController::class,'settingsUpdate'])->name('setting.update');
+    // user route
+    Route::resource('users', UserController::class);
+    //Category
+    Route::resource('category', CategoryController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 
@@ -59,4 +71,12 @@ Route::post('cart/update', [CartController::class, 'updateCart'])->name('cart.up
 //Search
 Route::get('search', [PageController::class, 'getSearch'])->name('search');
 
+//Category products
+Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');
+//Checkout
+Route::get('checkout', [PageController::class,'checkout'])->name('checkout');
 
+//File manager
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    Lfm::routes();
+});

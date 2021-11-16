@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
@@ -37,19 +38,19 @@ Route::group(['prefix' => '/user'], function () {
 Route::group(['prefix' => '/admin'], function () {
     //ADmin dashboard
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-
     //Product
     Route::resource('product', ProductController::class);
     //Order
     Route::resource('order', OrderController::class);
-
     // Settings
-    Route::get('setting', [AdminController::class,'settings'])->name('setting');
-    Route::post('setting/update', [AdminController::class,'settingsUpdate'])->name('setting.update');
+    Route::get('setting', [AdminController::class, 'settings'])->name('setting');
+    Route::post('setting/update', [AdminController::class, 'settingsUpdate'])->name('setting.update');
     // user route
     Route::resource('users', UserController::class);
     //Category
     Route::resource('category', CategoryController::class);
+    //Banner
+    Route::resource('banner', BannerController::class);
 });
 /*---------------------Admin route group end-----------------------*/
 
@@ -74,7 +75,7 @@ Route::get('search', [PageController::class, 'getSearch'])->name('search');
 //Category products
 Route::get('category/{id}', [CategoryController::class, 'getProductByCatId'])->name('catproducts');
 //Checkout
-Route::get('checkout', [PageController::class,'checkout'])->name('checkout');
+Route::get('checkout', [PageController::class, 'checkout'])->name('checkout');
 
 //File manager
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {

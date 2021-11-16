@@ -14,9 +14,9 @@ class checkRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next)
     {
-        if ($request->user()->role == $role) {
+        if ($request->user()->role == 'admin') {
             return $next($request);
         } else {
             request()->session()->flash('error', 'You do not have any permission to access this page');

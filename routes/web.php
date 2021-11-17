@@ -31,7 +31,7 @@ Route::group(['prefix' => '/user'], function () {
     Route::post('/register', [UserController::class, 'userRegisterSubmit'])->name('user.register.submit');
     Route::get('/logout', [UserController::class, 'userLogout'])->name('user.logout');
     //Profile
-    Route::get('/profile', [PageController::class, 'userProfile'])->name('user.profile');
+    Route::get('/profile', [PageController::class, 'userProfile'])->name('user.profile')->middleware('checkLogin');
     //User change password
     Route::get('/changepassword', [PageController::class,'changeUserPassword'])->name('user.change.password');
     Route::post('/changepassword/save', [PageController::class,'changPasswordStore'])->name('user.changepass.save');

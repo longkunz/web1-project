@@ -34,8 +34,8 @@ Route::group(['prefix' => '/user'], function () {
     //Profile
     Route::get('/profile', [PageController::class, 'userProfile'])->name('user.profile')->middleware('checkLogin');
     //User change password
-    Route::get('/changepassword', [PageController::class,'changeUserPassword'])->name('user.change.password');
-    Route::post('/changepassword/save', [PageController::class,'changPasswordStore'])->name('user.changepass.save');
+    Route::get('/changepassword', [PageController::class, 'changeUserPassword'])->name('user.change.password');
+    Route::post('/changepassword/save', [PageController::class, 'changPasswordStore'])->name('user.changepass.save');
 
     //  Order
     Route::get('/order', [PageController::class, 'orderIndex'])->name('user.order.index');

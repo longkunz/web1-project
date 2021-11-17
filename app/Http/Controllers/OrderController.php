@@ -73,21 +73,9 @@ class OrderController extends Controller
 
         // return $order_data['total_amount'];
         $order_data['status'] = "new";
-        $order_data['payment_status'] = 'Unpaid';
         $order->fill($order_data);
         $order->save();
-        // dd($order);
-        // if (request('payment_method') == 'paypal') {
-        //     return redirect()->route('payment')->with(['id' => $order->id]);
-        // } else {
-        //     session()->forget('cart');
-        //     session()->forget('coupon');
-        // }
-        // dd($order->id);
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
-
-        // dd($users);   
-
         request()->session()->flash('success', 'Your product successfully placed in order');
         return redirect()->route('index');
     }

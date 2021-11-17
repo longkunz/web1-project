@@ -19,6 +19,6 @@ class Cart extends Model
     //Count number of cart items
     public static function cartCount()
     {
-        return Cart::with('product')->where('user_id', Auth::user()->id)->orderBy('id', 'ASC')->count();
+        return Cart::with('product')->where('order_id', null)->where('user_id', Auth::user()->id)->orderBy('id', 'ASC')->count();
     }
 }

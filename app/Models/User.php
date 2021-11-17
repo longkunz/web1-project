@@ -41,4 +41,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    //Đếm số category đang active
+    public static function countActiveUser()
+    {
+        $data = User::where('status', 'active')->count();
+        if ($data) {
+            return $data;
+        }
+        return 0;
+    }
 }

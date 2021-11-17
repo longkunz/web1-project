@@ -18,6 +18,7 @@ class AllSeeder extends Seeder
             CategorySeeder::class,
             ProductSeeder::class,
             BannerSeeder::class,
+            SettingSeeder::class,
         ]);
     }
 }

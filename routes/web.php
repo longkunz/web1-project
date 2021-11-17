@@ -30,6 +30,16 @@ Route::group(['prefix' => '/user'], function () {
     Route::get('/register', [UserController::class, 'userRegister'])->name('user.register');
     Route::post('/register', [UserController::class, 'userRegisterSubmit'])->name('user.register.submit');
     Route::get('/logout', [UserController::class, 'userLogout'])->name('user.logout');
+    //Profile
+    Route::get('/profile', [PageController::class, 'userProfile'])->name('user.profile');
+    //User change password
+    Route::get('/changepassword', [PageController::class,'changeUserPassword'])->name('user.change.password');
+    Route::post('/changepassword/save', [PageController::class,'changPasswordStore'])->name('user.changepass.save');
+
+    //  Order
+    Route::get('/order', [PageController::class, 'orderIndex'])->name('user.order.index');
+    Route::get('/order/show/{id}', [PageController::class, 'orderShow'])->name('user.order.show');
+    Route::delete('/order/delete/{id}', [PageController::class, 'userOrderDelete'])->name('user.order.delete');
 });
 /*---------------------User route group end-----------------------*/
 

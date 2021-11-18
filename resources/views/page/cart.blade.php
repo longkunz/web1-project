@@ -2,6 +2,9 @@
 @section('title','Cart')
 @section('contents')
 @include('partial.breadcrumb',['name' => 'Shopping Cart','here' => 'Cart'])
+@php
+$sum=0;
+@endphp
 <!--================Cart Area =================-->
 <section class="cart_area padding_top">
     <div class="container">
@@ -45,6 +48,7 @@
                                 <td>
                                     @php
                                     $total = $item->product->price * $item->quantity;
+                                    $sum+=$total;
                                     @endphp
                                     <h5>{{number_format($total)}} $</h5>
                                 </td>
@@ -74,34 +78,13 @@
                                 <h5>Subtotal</h5>
                             </td>
                             <td>
-                                <h5>$2160.00</h5>
-                            </td>
-                        </tr>
-                        <tr class="shipping_area">
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <h5>Shipping</h5>
-                            </td>
-                            <td>
-                                <div class="shipping_box">
-                                    <ul class="list">
-                                        <li>
-                                            <a href="#">Free Shipping</a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="#">Local Delivery: $2.00</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                <h5>${{$sum}}</h5>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
                     <a class="btn_1" href="{{route('product.list')}}">Continue Shopping</a>
-                    <!-- <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a> -->
-                    <p>Checkout coming soon~</p>
                 </div>
                 @else
                 <p class="text-center">Cart is empty!</p>

@@ -1,3 +1,6 @@
+@php
+$site=DB::table('settings')->first();
+@endphp
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
@@ -7,7 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title','Longkunz Furniture Store')</title>
+    <!-- Title -->
+    <title>{{$site->title}} - @yield('title')</title>
+    <!-- Meta description -->
+    <meta name="description" content="{{$site->description}}" />
+    <!-- CSP meta tag for security -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'"> -->
     <link rel="icon" href="{{url('img/favicon.png')}}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{url('css/bootstrap.min.css')}}">

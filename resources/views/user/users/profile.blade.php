@@ -12,8 +12,8 @@
     <div class="card-header py-3">
         <h4 class=" font-weight-bold">Profile</h4>
         <ul class="breadcrumbs">
-            <li><a href="{{url('/user')}}" style="color:#999">Dashboard</a></li>
-            <li><a href="" class="active text-primary">Profile Page</a></li>
+            <li><a href="{{route('user.profile')}}" style="color:#999">Dashboard</a></li>
+            <li><a href="#" class="active text-primary">Profile Page</a></li>
         </ul>
     </div>
     <div class="card-body">
@@ -37,40 +37,21 @@
                 </div>
             </div>
             <div class="col-md-8">
-                <form class="border px-4 pt-2 pb-3" method="post" action="{{--route('admin.profile.update',$profile->id)--}}">
-                    @csrf
-                    <div class="form-group">
-                        <label for="inputTitle" class="col-form-label">Name</label>
-                        <input id="inputTitle" type="text" name="name" placeholder="Enter name" value="{{$profile->name}}" class="form-control">
-                        @error('name')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
+                <div class="form-group">
+                    <label for="inputTitle" class="col-form-label">Name</label>
+                    <input id="inputTitle" disabled type="text" name="name" placeholder="Enter name" value="{{$profile->name}}" class="form-control">
+                    @error('name')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
 
-                    <div class="form-group">
-                        <label for="inputEmail" class="col-form-label">Email</label>
-                        <input id="inputEmail" disabled type="email" name="email" placeholder="Enter email" value="{{$profile->email}}" class="form-control">
-                        @error('email')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputPhoto" class="col-form-label">Photo</label>
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                                    <i class="fa fa-picture-o"></i> Choose
-                                </a>
-                            </span>
-                            <input id="thumbnail" class="form-control" type="text" name="photo" value="{{$profile->photo}}">
-                        </div>
-                        @error('photo')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-success btn-sm">Update</button>
-                </form>
+                <div class="form-group">
+                    <label for="inputEmail" class="col-form-label">Email</label>
+                    <input id="inputEmail" disabled type="email" name="email" placeholder="Enter email" value="{{$profile->email}}" class="form-control">
+                    @error('email')
+                    <span class="text-danger">{{$message}}</span>
+                    @enderror
+                </div>
             </div>
         </div>
     </div>
@@ -101,7 +82,7 @@
     }
 
     .image {
-        background:url('{{asset('backend/img/background.jpg')}}');
+        background: url('/backend/img/background.jpg');
         height: 150px;
         background-position: center;
         background-attachment: cover;
@@ -120,13 +101,3 @@
         padding-right: 8px;
     }
 </style>
-
-@push('scripts')
-<script src="{{asset('/vendor/laravel-filemanager/js/stand-alone-button.js')}}"></script>
-<script>
-    var route_prefix = "{{url('/filemanager')}}";
-    $('#lfm').filemanager('image', {
-        prefix: route_prefix
-    });
-</script>
-@endpush

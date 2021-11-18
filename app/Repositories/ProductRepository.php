@@ -1,10 +1,13 @@
 <?php
+
 namespace App\Repositories;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Product;
 
-class ProductRepository{
+class ProductRepository
+{
     //get product with number of product perpage
     public function getProducts($number_per_page)
     {

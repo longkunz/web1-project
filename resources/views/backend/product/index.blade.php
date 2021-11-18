@@ -102,10 +102,18 @@
   div.dataTables_wrapper div.dataTables_paginate {
     display: none;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/order
   .zoom {
     transition: transform .2s;
     /* Animation */
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> feature/order
   .zoom:hover {
     transform: scale(5);
   }

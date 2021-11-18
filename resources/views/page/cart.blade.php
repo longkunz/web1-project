@@ -62,7 +62,7 @@
                                 <td></td>
                                 <td>
                                     <div class="cupon_text float-right">
-                                        <p>Coupon function is coming soon!</p>
+                                        <a href="{{route('checkout')}}" class="btn_1">Checkout</a>
                                     </div>
                                 </td>
                             </tr>

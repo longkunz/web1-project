@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -33,8 +34,8 @@ Route::group(['prefix' => '/user'], function () {
     //Profile
     Route::get('/profile', [PageController::class, 'userProfile'])->name('user.profile')->middleware('checkLogin');
     //User change password
-    Route::get('/changepassword', [PageController::class,'changeUserPassword'])->name('user.change.password');
-    Route::post('/changepassword/save', [PageController::class,'changPasswordStore'])->name('user.changepass.save');
+    Route::get('/changepassword', [PageController::class, 'changeUserPassword'])->name('user.change.password');
+    Route::post('/changepassword/save', [PageController::class, 'changPasswordStore'])->name('user.changepass.save');
 
     //  Order
     Route::get('/order', [PageController::class, 'orderIndex'])->name('user.order.index');

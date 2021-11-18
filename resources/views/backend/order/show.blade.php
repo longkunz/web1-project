@@ -132,6 +132,7 @@
 
 @push('styles')
 <style>
+<<<<<<< HEAD
 .order-info,
 .shipping-info {
     background: #ECECEC;
@@ -142,5 +143,17 @@
 .shipping-info h4 {
     text-decoration: underline;
 }
+=======
+  .order-info,
+  .shipping-info {
+    background: #ECECEC;
+    padding: 20px;
+  }
+
+  .order-info h4,
+  .shipping-info h4 {
+    text-decoration: underline;
+  }
+>>>>>>> feature/order
 </style>
 @endpush

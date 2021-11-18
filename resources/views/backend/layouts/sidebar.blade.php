@@ -29,7 +29,7 @@
   <!-- Nav Item - Pages Collapse Menu -->
   <!-- Nav Item - Charts -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('unisharp.lfm.show')}}">
       <i class="fas fa-fw fa-chart-area"></i>
       <span>Media Manager</span></a>
   </li>
@@ -42,8 +42,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Banner Options:</h6>
-        <a class="collapse-item" href="#">Banners</a>
-        <a class="collapse-item" href="#">Add Banners</a>
+        <a class="collapse-item" href="{{route('banner.index')}}">Banners</a>
+        <a class="collapse-item" href="{{route('banner.create')}}">Add Banners</a>
       </div>
     </div>
   </li>
@@ -63,8 +63,8 @@
     <div id="categoryCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Category Options:</h6>
-        <a class="collapse-item" href="#">Category</a>
-        <a class="collapse-item" href="#">Add Category</a>
+        <a class="collapse-item" href="{{route('category.index')}}">Category</a>
+        <a class="collapse-item" href="{{route('category.create')}}">Add Category</a>
       </div>
     </div>
   </li>
@@ -77,15 +77,15 @@
     <div id="productCollapse" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Product Options:</h6>
-        <a class="collapse-item" href="#">Products</a>
-        <a class="collapse-item" href="#">Add Product</a>
+        <a class="collapse-item" href="{{route('product.index')}}">Products</a>
+        <a class="collapse-item" href="{{route('product.create')}}">Add Product</a>
       </div>
     </div>
   </li>
 
   <!--Orders -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('order.index')}}">
       <i class="fas fa-hammer fa-chart-area"></i>
       <span>Orders</span>
     </a>
@@ -94,19 +94,19 @@
   <hr class="sidebar-divider d-none d-md-block">
   <!-- Heading -->
   <div class="sidebar-heading">
-    General Settings
+    General
   </div>
-  
+
   <!-- Users -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('users.index')}}">
       <i class="fas fa-users"></i>
       <span>Users</span></a>
   </li>
 
   <!-- Settings -->
   <li class="nav-item">
-    <a class="nav-link" href="#">
+    <a class="nav-link" href="{{route('setting')}}">
       <i class="fas fa-cogs"></i>
       <span>Settings</span></a>
   </li>

@@ -53,11 +53,11 @@
                             @isset(Auth::user()->id)
                             @if (Auth::user()->role === 'admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('admin.index')}}">Contact</a>
+                                <a class="nav-link" href="{{route('admin.index')}}">Admin</a>
                             </li>
                             @else
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('user.profile')}}">Contact</a>
+                                <a class="nav-link" href="{{route('user.profile')}}">Profile</a>
                             </li>
                             @endif
                             @endisset

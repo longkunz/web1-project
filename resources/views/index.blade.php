@@ -116,7 +116,8 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
                                     <a href="{{route('product.detail',$product->slug)}}">
-                                        <img src="{{$product->photo}}" alt="{{$product->title}}">
+                                        @php $photos = explode(',',$product->photo); @endphp
+                                        <img src="{{$photos[0]}}" alt="{{$product->title}}">
                                     </a>
                                     <div class="single_product_text">
                                         <h4>{{$product->title}}</h4>
@@ -141,7 +142,8 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
                                     <a href="{{route('product.detail',$product->slug)}}">
-                                        <img src="{{$product->photo}}" alt="{{$product->title}}">
+                                        @php $photos = explode(',',$product->photo); @endphp
+                                        <img src="{{$photos[0]}}" alt="{{$product->title}}">
                                     </a>
                                     <div class="single_product_text">
                                         <h4>{{$product->title}}</h4>
@@ -179,7 +181,8 @@
                 <div class="best_product_slider owl-carousel">
                     @foreach ($best as $item)
                     <div class="single_product_item">
-                        <a href="{{route('product.detail',$item->product->id)}}"><img src="{{$item->product->photo}}" alt="{{$item->product->title}}"></a>
+                        @php $photos = explode(',',$item->product->photo); @endphp
+                        <a href="{{route('product.detail',$item->product->id)}}"><img src="{{$photos[0]}}" alt="{{$item->product->title}}"></a>
                         <div class="single_product_text">
                             <h4>{{$item->product->title}}</h4>
                             <h3>${{number_format($item->product->price)}}</h3>

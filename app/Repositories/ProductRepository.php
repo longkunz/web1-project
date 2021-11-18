@@ -16,7 +16,7 @@ class ProductRepository
     //get product detail by slug
     public function getProductDetail($slug)
     {
-        return Product::where('slug', $slug)->first();
+        return Product::with('cat_info')->where('slug', $slug)->first();
     }
     //get product with cat_info
     public function getProductWithCat($number_per_page)

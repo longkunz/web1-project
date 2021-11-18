@@ -34,13 +34,13 @@ Route::group(['prefix' => '/user'], function () {
     //Profile
     Route::get('/profile', [PageController::class, 'userProfile'])->name('user.profile')->middleware('checkLogin');
     //User change password
-    Route::get('/changepassword', [PageController::class, 'changeUserPassword'])->name('user.change.password');
-    Route::post('/changepassword/save', [PageController::class, 'changPasswordStore'])->name('user.changepass.save');
+    Route::get('/changepassword', [PageController::class, 'changeUserPassword'])->name('user.change.password')->middleware('checkLogin');
+    Route::post('/changepassword/save', [PageController::class, 'changPasswordStore'])->name('user.changepass.save')->middleware('checkLogin');
 
     //  Order
-    Route::get('/order', [PageController::class, 'orderIndex'])->name('user.order.index');
-    Route::get('/order/show/{id}', [PageController::class, 'orderShow'])->name('user.order.show');
-    Route::delete('/order/delete/{id}', [PageController::class, 'userOrderDelete'])->name('user.order.delete');
+    Route::get('/order', [PageController::class, 'orderIndex'])->name('user.order.index')->middleware('checkLogin');
+    Route::get('/order/show/{id}', [PageController::class, 'orderShow'])->name('user.order.show')->middleware('checkLogin');
+    Route::delete('/order/delete/{id}', [PageController::class, 'userOrderDelete'])->name('user.order.delete')->middleware('checkLogin');
 });
 /*---------------------User route group end-----------------------*/
 

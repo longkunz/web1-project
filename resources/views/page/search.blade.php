@@ -25,12 +25,13 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div class="single_product_item">
                                     <a href="{{route('product.detail',$product->slug)}}">
-                                        <img src="{{$product->photo}}" alt="{{$product->title}}">
+                                        @php $photos = explode(',',$product->photo); @endphp
+                                        <img src="{{$photos[0]}}" alt="{{$product->title}}">
                                     </a>
                                     <div class="single_product_text">
                                         <h4>{{$product->title}}</h4>
                                         <h3>{{number_format($product->price)}} $</h3>
-                                        <a href="{{route('cart.add',$product->slug)}}" class="add_cart">+ add to cart<i class="ti ti-heart"></i></a>
+                                        <a href="{{route('cart.add',$product->slug)}}" class="add_cart">+ add to cart</a>
                                     </div>
                                 </div>
                             </div>

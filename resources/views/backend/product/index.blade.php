@@ -86,7 +86,7 @@
           @endforeach
         </tbody>
       </table>
-      <span style="float:right">{{$products->links()}}</span>
+      {{$products->links('layouts.paginate')}}
       @else
       <h6 class="text-center">Không có sản phẩm! Hãy thêm một sản phẩm mới :D</h6>
       @endif
@@ -96,24 +96,18 @@
 @endsection
 
 @push('styles')
+<!-- themify icon -->
+<link rel="stylesheet" href="https://unpkg.com/@icon/themify-icons/themify-icons.css">
 <link href="{{asset('backend/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
 <style>
   div.dataTables_wrapper div.dataTables_paginate {
     display: none;
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/order
   .zoom {
     transition: transform .2s;
     /* Animation */
   }
-<<<<<<< HEAD
-=======
-
->>>>>>> feature/order
   .zoom:hover {
     transform: scale(5);
   }

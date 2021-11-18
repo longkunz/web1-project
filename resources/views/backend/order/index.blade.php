@@ -50,7 +50,7 @@
             <td>{{$order->name}}</td>
             <td>{{$order->email}}</td>
             <td>{{$order->quantity}}</td>
-            <td>{{number_format($order->shipping)}}</td>
+            <td>${{number_format($order->shipping)}}</td>
             <td>{{number_format($order->total_amount)}}</td>
             <td>
               @if($order->status=='new')

@@ -18,10 +18,16 @@
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Shop
                                 </a>
+                                @php
+                                $Categories = App\Models\Category::all();
+                                @endphp
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
                                     <a class="dropdown-item" href="{{route('product.list')}}"> products list</a>
-                                    <a class="dropdown-item" href="single-product.html">product details</a>
-
+                                    @isset($Categories)
+                                    @foreach ($Categories as $cat)
+                                    <a class="dropdown-item" href="{{route('catproducts',$cat->id)}}">{{$cat->name}}</a>
+                                    @endforeach
+                                    @endisset
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -29,12 +35,10 @@
                                     pages
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="login.html"> login</a>
-                                    <a class="dropdown-item" href="tracking.html">tracking</a>
-                                    <a class="dropdown-item" href="checkout.html">product checkout</a>
-                                    <a class="dropdown-item" href="cart.html">shopping cart</a>
-                                    <a class="dropdown-item" href="confirmation.html">confirmation</a>
-                                    <a class="dropdown-item" href="elements.html">elements</a>
+                                    <a class="dropdown-item" href="{{route('login')}}"> login</a>
+                                    <a class="dropdown-item" href="{{route('user.order.index')}}">tracking</a>
+                                    <a class="dropdown-item" href="{{route('checkout')}}">product checkout</a>
+                                    <a class="dropdown-item" href="{{route('cart.index')}}">shopping cart</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -46,10 +50,18 @@
                                     <a class="dropdown-item" href="{{route('user.register')}}">register</a>
                                 </div>
                             </li>
-
+                            @isset(Auth::user()->id)
+                            @if (Auth::user()->role === 'admin')
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" href="{{route('admin.index')}}">Contact</a>
                             </li>
+                            @else
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('user.profile')}}">Contact</a>
+                            </li>
+                            @endif
+                            @endisset
+
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
@@ -65,7 +77,6 @@
                         </div>
                         <a href="{{route('user.logout')}}"><i class="fas fa-sign-out-alt"></i></a>
                         @else
-                        <a href="{{route('login')}}"><i class="ti ti-heart"></i></a>
                         <div class="dropdown cart">
                             <a class="dropdown-toggle" href="{{route('cart.index')}}">
                                 <i class="fas fa-cart-plus"><span>0</span></i>

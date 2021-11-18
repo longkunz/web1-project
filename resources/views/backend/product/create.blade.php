@@ -114,7 +114,7 @@
 <script src="{{asset('backend/summernote/summernote.min.js')}}"></script>
 <script>
   $('#description').summernote();
-  $('#summary').summernote();
+  $('#size').summernote();
   var route_prefix = "{{url('/filemanager')}}";
   $('#lfm').filemanager('image', {
     prefix: route_prefix

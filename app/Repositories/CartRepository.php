@@ -18,6 +18,7 @@ class CartRepository
     //Store item to cart
     public function storeCartItem(Request $request)
     {
+        // dd($request);
         $quant = $request->quantity;
         if (!$quant) {
             $quant = 1;

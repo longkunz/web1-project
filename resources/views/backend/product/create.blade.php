@@ -54,7 +54,7 @@
 
       <div class="form-group">
         <label for="size" class="col-form-label">Size <span class="text-danger">*</span></label>
-        <input id="size" type="text" name="size" placeholder="Enter size" value="{{old('weight')}}" class="form-control">
+        <textarea class="form-control" id="size" name="size">{{old('size')}}</textarea>
         @error('size')
         <span class="text-danger">{{$message}}</span>
         @enderror

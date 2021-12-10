@@ -62,6 +62,49 @@ class SettingTest extends TestCase
         }
         DB::rollBack();
     }
+    //test update setting with description is array
+    public function test_DescriptionArray()
+    {
+        $setting = new Setting();
+        $data['description'] = array();
+        $data['title'] = "Title";
+        $data['logo'] = "logo";
+        $data['address'] = "address";
+        $data['phone'] = "phone";
+        $data['email'] = "email";
+        DB::beginTransaction();
+        try {
+            $stored = $setting->where("id", "1")->first();
+            $status = $stored->fill($data)->save();
+            $actual=$setting->where("id", "1")->first();
+            $this->assertEquals("[]",$actual->description);
+        } catch (Throwable $e) {
+            // $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    //test update setting with description is object
+    public function test_DescriptionObject()
+    {
+        $setting = new Setting();
+        $data['description'] = $setting;
+        $data['title'] = "Title";
+        $data['logo'] = "logo";
+        $data['address'] = "address";
+        $data['phone'] = "phone";
+        $data['email'] = "email";
+        DB::beginTransaction();
+        try {
+            $stored = $setting->where("id", "1")->first();
+            $status = $stored->fill($data)->save();
+            $actual=$setting->where("id", "1")->first();
+            $this->assertEquals("[]",$actual->description);
+        } catch (Throwable $e) {
+            // $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    
     //test update setting with empty title
     public function test_emptyTitle()
     {

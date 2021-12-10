@@ -156,19 +156,29 @@ class BannerTest extends TestCase
     }
 
     // Test update banner with valid input ok
-    public function test_updateBannerOk()
+    public function test_updateBannerPassTrue()
     {
         $banner = new Banner();
-        $banner_data['title'] = 'Hello';
-        $banner_data['description'] = 'Hello';
-        $banner_data['image'] = 'https://via.placeholder.com/640x480.png/00ff77?text=animals+eos';
-        $banner_data['link'] = 'https://www.facebook.com/nhquyen2001/';
-        $banner_data['status'] = 'inactive';
-
+        // $newBannerData = [
+        //     "title" => "Hello",
+        //     "description" => "Hello",
+        //     "image" => "https://via.placeholder.com/640x480.png/00ff77?text=animals+eos",
+        //     "link" => "https://www.facebook.com/nhquyen2001/",
+        //     "status" => "inactive",
+        // ];
+        $newBannerTitle = "Hello";
+        $newDescription = "Hello";
+        $newImage = "https://via.placeholder.com/640x480.png/00ff77?text=animals+eos";
+        $newLink = "https://www.facebook.com/nhquyen2001/";
+        $newStatus = "inactive";
         DB::beginTransaction();
-        $banner->update($banner_data);
-        $actual = $banner->findOrFail($banner_data['title']);
-        $this->assertEquals($banner_data['title'], $actual[0]['title']);
+        // $banner->create($newBannerData);
+        $newBanner = $banner->where("title", "Hello")->first();
+        $status = $newBanner->update(['title' => $newBannerTitle]);
+        $newBanner = $banner->where("title", "Hello")->first();
+        // var_dump($newBanner->title);die();
+        $this->assertEquals("Hello", $newBanner->title);
+
         DB::rollBack();
     }
 

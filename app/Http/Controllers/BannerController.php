@@ -96,12 +96,16 @@ class BannerController extends Controller
             'image' => 'string|required',
             'link' => 'string|nullable',
             'status' => 'required|in:active,inactive',
+            'lock_version' => 'required|integer|min:0',
         ]);
         $data = $request->all();
-
-        $status = $banner->fill($data)->save();
-        if ($status) {
-            request()->session()->flash('success', 'Banner successfully updated');
+        if ($data['lock_version'] == $banner->lock_version) {
+            $status = $banner->fill($data);
+            $banner->lock_version = $banner->lock_version + 1;
+            $status = $banner->save();
+            if ($status) {
+                request()->session()->flash('success', 'Banner successfully updated');
+            }
         } else {
             request()->session()->flash('error', 'Error occurred while updating banner');
         }

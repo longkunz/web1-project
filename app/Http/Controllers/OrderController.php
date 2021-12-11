@@ -116,13 +116,20 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'status' => 'required|in:new,process,delivered,cancel'
+            'status' => 'required|in:new,process,delivered,cancel',
+            'lock_version' => 'required|integer|min:0'
         ]);
         $order = $this->orderRepository->findOrder($id);
         $order['status'] = $request->status;
-        $status = $order->save();
-        if ($status) {
-            request()->session()->flash('success', 'Order Successfully updated');
+        $data = $request->all();
+
+        if ($data['lock_version'] == $order->lock_version) {
+            $status = $order->fill($data);
+            $order->lock_version = $order->lock_version + 1;
+            $status = $order->save();
+            if ($status) {
+                request()->session()->flash('success', 'Order Successfully updated');
+            }
         } else {
             request()->session()->flash('error', 'Order can not updated');
         }

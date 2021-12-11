@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'order_number', 'sub_total', 'quantity', 'status', 'total_amount', 'name', 'address', 'phone', 'email', 'payment_status', 'shipping'];
+    protected $fillable = ['user_id', 'order_number', 'sub_total', 'quantity', 'status', 'total_amount', 'name', 'address', 'phone', 'email', 'payment_status', 'shipping','lock_version'];
+    protected $attributes = [
+        'lock_version' => 0,
+    ];
     //Function
     public function cart_info()
     {

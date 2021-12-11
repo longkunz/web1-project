@@ -145,17 +145,24 @@ class ProductController extends Controller
             'status' => 'required|in:active,inactive',
             'price' => 'required|numeric',
             'size' => 'string|nullable',
+            'version' => 'required|integer|min:0',
         ]);
         // //Gán dữ liệu
         $data = $request->all();
         //$data['is_featured'] = $request->input('is_featured', 0);
         //Gọi phương thức update
-        $status = $product->fill($data)->save();
+        // $status = $product->fill($data)->save();
+
         //Kiểm tra quá trình thêm product đã thành công hay chưa
-        if ($status) {
-            request()->session()->flash('success', 'Product Updated Successfully');
+        if ($data['version'] == $product->version) {
+            $status = $product->fill($data);
+            $product->version = $product->version + 1;
+            $status = $product->save();
+            if ($status) {
+                request()->session()->flash('success', 'Product successfully updated');
+            }
         } else {
-            request()->session()->flash('error', 'Please try again!!');
+            request()->session()->flash('error', 'Error occurred while updating product');
         }
         return redirect()->route('product.index');
     }

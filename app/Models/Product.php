@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'slug', 'summary', 'description', 'cat_id', 'price', 'status', 'photo', 'stock', 'size'];
+    protected $fillable = ['title', 'slug', 'summary', 'description', 'cat_id', 'price', 'status', 'photo', 'stock', 'size', 'version'];
+    protected $attributes = [
+        'version' => 0,
+    ];
     //Đếm số sản phẩm đang active trong db
     public static function countActiveProduct()
     {

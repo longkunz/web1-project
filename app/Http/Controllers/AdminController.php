@@ -15,12 +15,13 @@ class AdminController extends Controller
     //Setting admin
     public function settings()
     {
-        $data = Setting::first();
+        $data = Setting::lockForUpdate()->first();
         return view('backend.setting.setting')->with('data', $data);
     }
 
     public function settingsUpdate(Request $request)
     {
+        // dd($request);
         // return $request->all();
         $this->validate($request, [
             'title' => 'required|string',
@@ -32,10 +33,17 @@ class AdminController extends Controller
         ]);
         $data = $request->all();
         // return $data;
-        $settings = Setting::first();
-        $settings['title'] = $data['title'];
-        // return $settings;
-        $status = $settings->fill($data)->save();
+        $settings = Setting::lockForUpdate()->first();
+        $status = false;
+        // dd($settings['updated_at'] == $data['updated_at']);
+        if ($settings['updated_at'] == $data['updated_at']) {
+            $settings['title'] = $data['title'];
+            $status = $settings->fill($data)->save();
+        } else {
+            request()->session()->flash('error', 'Please reload page and try again');
+            return redirect()->route('setting');
+        }
+
         if ($status) {
             request()->session()->flash('success', 'Setting successfully updated');
         } else {

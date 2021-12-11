@@ -8,6 +8,7 @@
         @include('backend.layouts.notification')
         <form method="post" action="{{route('setting.update')}}">
             @csrf
+            <input type="hidden" name="updated_at" value="{{$data->updated_at}}">
             <div class="form-group">
                 <label for="title" class="col-form-label">Title <span class="text-danger">*</span></label>
                 <textarea class="form-control" id="title" name="title">{{$data->title}}</textarea>

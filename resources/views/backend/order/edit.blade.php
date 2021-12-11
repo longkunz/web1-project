@@ -11,6 +11,7 @@
       @method('PATCH')
       <div class="form-group">
         <label for="status">Status :</label>
+        <input type="hidden" name="lock_version" value="{{$order->lock_version}}">
         <select name="status" id="status" class="form-control">
           <option value="">--Select Status--</option>
           <option value="new" {{(($order->status=='new')? 'selected' : '')}}>New</option>

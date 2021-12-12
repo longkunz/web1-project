@@ -190,29 +190,7 @@ class CategoryTest extends TestCase
         }
         DB::rollBack();
     }
-    //test update
-    public function test_updateCategoryTrue()
-    {
-        $category = new Category();
-        $newCategoryData =
-            [
-                'name' => "Test",
-                'status' => "active",
-            ];
-        DB::beginTransaction();
-        $category->create($newCategoryData);
-        $newCategory = $category->where("name", "Test")->first();
-        
-        $newCategory = $category->where("status", "active")->first();
-        try {
-            $category->fill($newCategory);
-            $category->save();
-        } catch (Throwable $e) {
-            $this->assertTrue(true);
-        }
-        DB::rollBack();
-    }
-    
+ 
     public function test_deleteCategory()
     {
         $category = new Category();
@@ -364,6 +342,219 @@ class CategoryTest extends TestCase
             $this->assertTrue(true);
         }else{
             $this->assertTrue(false);
+        }
+        DB::rollBack();
+    }
+    //Test category update null
+    public function test_UpdateNull()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newName = null;
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    //Test category update array
+    public function test_UpdateArray()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+
+        $newName = array(1,2,3);
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test category update Object
+    public function test_UpdateObject()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newName = $category;
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test category update with stock negative
+    public function test_UpdateNameNegative()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newName = -10;
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test category update with price negative
+    public function test_UpdateStatusNegative()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newName = -50000;
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    //test update name
+    public function test_UpdateName()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newName = 'stream';
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    public function test_UpdateStatus()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newStatus = 'acctive';
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("status", "acctive")->first();
+            $status = $category->update(['acctive' => $newStatus]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    //test update status null
+    public function test_UpdateStatusNull()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newStatus = 'null';
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("status", "acctive")->first();
+            $status = $category->update(['acctive' => $newStatus]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    //test update name null
+    public function test_UpdateNameNull()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newName = 'null';
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+    //test update name null
+    public function test_UpdateNameArray()
+    {
+        $category = new Category();
+        $newCategoryData =
+            [
+                'name' => "stream",    
+                'status' => "active",              
+                'cat_id' => 1,
+            ];
+        $newName = 'null';
+        DB::beginTransaction();
+        try {
+            $category->create($newCategoryData);
+            $newCategory = $category->where("name", "stream")->first();
+            $status = $category->update(['stream' => $newName]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
         }
         DB::rollBack();
     }

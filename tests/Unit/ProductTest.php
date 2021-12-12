@@ -304,7 +304,7 @@ class ProductTest extends TestCase
         try {
             $product->create($newProductData);
             $newProduct = $product->where("title", "hello")->first();
-            $status = $newUser->update(['title' => $newTitle]);
+            $status = $product->update(['title' => $newTitle]);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
@@ -332,7 +332,7 @@ class ProductTest extends TestCase
         try {
             $product->create($newProductData);
             $newProduct = $product->where("title", "hello")->first();
-            $status = $newUser->update(['stock' => $newStock]);
+            $status = $product->update(['stock' => $newStock]);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
@@ -360,7 +360,7 @@ class ProductTest extends TestCase
         try {
             $product->create($newProductData);
             $newProduct = $product->where("title", "hello")->first();
-            $status = $newUser->update(['stock' => $newStock]);
+            $status = $product->update(['stock' => $newStock]);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
@@ -388,7 +388,7 @@ class ProductTest extends TestCase
         try {
             $product->create($newProductData);
             $newProduct = $product->where("title", "hello")->first();
-            $status = $newUser->update(['stock' => $newStock]);
+            $status = $product->update(['stock' => $newStock]);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }
@@ -416,7 +416,7 @@ class ProductTest extends TestCase
         try {
             $product->create($newProductData);
             $newProduct = $product->where("title", "hello")->first();
-            $status = $newUser->update(['price' => $newPrice]);
+            $status = $product->update(['price' => $newPrice]);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }

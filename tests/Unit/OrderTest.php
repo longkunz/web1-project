@@ -34,6 +34,7 @@ class OrderTest extends TestCase
     public function test_placeOrder()
     {
         $order = new Order();
+        $order_data['lock_version'] = "1";
         $order_data['order_number'] = "ORD-123456";
         $order_data['user_id'] = "1";
         $order_data['sub_total'] = "1000";
@@ -46,6 +47,7 @@ class OrderTest extends TestCase
         $order_data['email'] = "hovietlong234@gmail.com";
         $order_data['phone'] = "0382987829";
         $order_data['status'] = "new";
+        
         DB::beginTransaction();
         $order->fill($order_data);
         $order->save();
@@ -199,6 +201,7 @@ class OrderTest extends TestCase
     public function test_emptyPaymentStatus()
     {
         $order = new Order();
+        $order_data['lock_version'] = "1";
         $order_data['order_number'] = "ORD-123456";
         $order_data['user_id'] = "1";
         $order_data['sub_total'] = "1000";

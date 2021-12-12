@@ -61,6 +61,8 @@ class OrderController extends Controller
             request()->session()->flash('error', 'Cart is Empty !');
             return back();
         }
+
+        
         $order = new Order();
         $order_data = $request->all();
         $order_data['order_number'] = 'ORD-' . strtoupper(Str::random(10));

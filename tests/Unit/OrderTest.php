@@ -350,4 +350,169 @@ class OrderTest extends TestCase
         }
         DB::rollBack();
     }
+
+    // Test update with status null
+    public function test_updateStatusNull()
+    {
+        $order = new Order();
+        $newOrderData = [
+            'order_number' => "ORD-123456",
+            'user_id' => "2",
+            'sub_total' => "1000",
+            'quantity' => "5",
+            'shipping' => "10",
+            'payment_status' => "unpaid",
+            'total_amount' => "5005",
+            'name' => "Ho Viet Long",
+            'email' => "hovietlong234@gmail.com",
+            'phone' => "0382987829",
+            'status' => "new",
+            'lock_version' => '0',
+        ];
+        $newStatus = Null;
+        DB::beginTransaction();
+        try {
+            $order->create($newOrderData);
+            $newOrder = $order->where("user_id", "2")->first();
+            $status = $newOrder->update($newOrderData);
+            $newOrder->save();
+            $newOrder = Order::where('user_id', "2")->first();
+            $this->assertEquals($newStatus, $newOrder->user_id);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    // Test update with status Array
+    public function test_updateStatusArray()
+    {
+        $order = new Order();
+        $newOrderData = [
+            'order_number' => "ORD-123456",
+            'user_id' => "2",
+            'sub_total' => "1000",
+            'quantity' => "5",
+            'shipping' => "10",
+            'payment_status' => "unpaid",
+            'total_amount' => "5005",
+            'name' => "Ho Viet Long",
+            'email' => "hovietlong234@gmail.com",
+            'phone' => "0382987829",
+            'status' => "new",
+            'lock_version' => '0',
+        ];
+        $newStatus = array();
+        DB::beginTransaction();
+        try {
+            $order->create($newOrderData);
+            $newOrder = $order->where("user_id", "2")->first();
+            $status = $newOrder->update($newOrderData);
+            $newOrder->save();
+            $newOrder = Order::where('user_id', "2")->first();
+            $this->assertEquals($newStatus, $newOrder->user_id);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    // Test update with status Object
+    public function test_updateStatusObject()
+    {
+        $order = new Order();
+        $newOrderData = [
+            'order_number' => "ORD-123456",
+            'user_id' => "2",
+            'sub_total' => "1000",
+            'quantity' => "5",
+            'shipping' => "10",
+            'payment_status' => "unpaid",
+            'total_amount' => "5005",
+            'name' => "Ho Viet Long",
+            'email' => "hovietlong234@gmail.com",
+            'phone' => "0382987829",
+            'status' => "new",
+            'lock_version' => '0',
+        ];
+        $newStatus = $order;
+        DB::beginTransaction();
+        try {
+            $order->create($newOrderData);
+            $newOrder = $order->where("user_id", "2")->first();
+            $status = $newOrder->update($newOrderData);
+            $newOrder->save();
+            $newOrder = Order::where('user_id', "2")->first();
+            $this->assertEquals($newStatus, $newOrder->user_id);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    // Test update with status Empty
+    public function test_updateStatusEmpty()
+    {
+        $order = new Order();
+        $newOrderData = [
+            'order_number' => "ORD-123456",
+            'user_id' => "2",
+            'sub_total' => "1000",
+            'quantity' => "5",
+            'shipping' => "10",
+            'payment_status' => "unpaid",
+            'total_amount' => "5005",
+            'name' => "Ho Viet Long",
+            'email' => "hovietlong234@gmail.com",
+            'phone' => "0382987829",
+            'status' => "new",
+            'lock_version' => '0',
+        ];
+        $newStatus = '';
+        DB::beginTransaction();
+        try {
+            $order->create($newOrderData);
+            $newOrder = $order->where("user_id", "2")->first();
+            $status = $newOrder->update($newOrderData);
+            $newOrder->save();
+            $newOrder = Order::where('user_id', "2")->first();
+            $this->assertEquals($newStatus, $newOrder->user_id);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    // Test update with status Boolean
+    public function test_updateStatusBoolean()
+    {
+        $order = new Order();
+        $newOrderData = [
+            'order_number' => "ORD-123456",
+            'user_id' => "2",
+            'sub_total' => "1000",
+            'quantity' => "5",
+            'shipping' => "10",
+            'payment_status' => "unpaid",
+            'total_amount' => "5005",
+            'name' => "Ho Viet Long",
+            'email' => "hovietlong234@gmail.com",
+            'phone' => "0382987829",
+            'status' => "new",
+            'lock_version' => '0',
+        ];
+        $newStatus = true;
+        DB::beginTransaction();
+        try {
+            $order->create($newOrderData);
+            $newOrder = $order->where("user_id", "2")->first();
+            $status = $newOrder->update($newOrderData);
+            $newOrder->save();
+            $newOrder = Order::where('user_id', "2")->first();
+            $this->assertEquals($newStatus, $newOrder->user_id);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
 }

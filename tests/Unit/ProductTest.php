@@ -267,7 +267,7 @@ class ProductTest extends TestCase
         }
         DB::rollBack();
     }
-    //Test order with empty all fields
+    //Test product with empty all fields
     public function test_emptyAll()
     {
         $product = new Product();
@@ -277,6 +277,146 @@ class ProductTest extends TestCase
         try {
             $product->fill($product_data);
             $product->save();
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test product update null
+    public function test_UpdateNull()
+    {
+        $product = new Product();
+        $newProductData =
+            [
+                'title' => "hello",
+                'slug' => "hello",
+                'summary' => "hello",
+                'description' => "hello",
+                'photo' => "https://via.placeholder.com/640x480.png/00ff77?text=animals+eos",
+                'stock' => 10,
+                'status' => "active",
+                'price' => 50000,
+                'cat_id' => 1,
+            ];
+        $newTitle = null;
+        DB::beginTransaction();
+        try {
+            $product->create($newProductData);
+            $newProduct = $product->where("title", "hello")->first();
+            $status = $newUser->update(['title' => $newTitle]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test product update array
+    public function test_UpdateArray()
+    {
+        $product = new Product();
+        $newProductData =
+            [
+                'title' => "hello",
+                'slug' => "hello",
+                'summary' => "hello",
+                'description' => "hello",
+                'photo' => "https://via.placeholder.com/640x480.png/00ff77?text=animals+eos",
+                'stock' => 10,
+                'status' => "active",
+                'price' => 50000,
+                'cat_id' => 1,
+            ];
+        $newStock = array(1,2,3);
+        DB::beginTransaction();
+        try {
+            $product->create($newProductData);
+            $newProduct = $product->where("title", "hello")->first();
+            $status = $newUser->update(['stock' => $newStock]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test product update Object
+    public function test_UpdateObject()
+    {
+        $product = new Product();
+        $newProductData =
+            [
+                'title' => "hello",
+                'slug' => "hello",
+                'summary' => "hello",
+                'description' => "hello",
+                'photo' => "https://via.placeholder.com/640x480.png/00ff77?text=animals+eos",
+                'stock' => 10,
+                'status' => "active",
+                'price' => 50000,
+                'cat_id' => 1,
+            ];
+        $newStock = $product;
+        DB::beginTransaction();
+        try {
+            $product->create($newProductData);
+            $newProduct = $product->where("title", "hello")->first();
+            $status = $newUser->update(['stock' => $newStock]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test product update with stock negative
+    public function test_UpdateStockNegative()
+    {
+        $product = new Product();
+        $newProductData =
+            [
+                'title' => "hello",
+                'slug' => "hello",
+                'summary' => "hello",
+                'description' => "hello",
+                'photo' => "https://via.placeholder.com/640x480.png/00ff77?text=animals+eos",
+                'stock' => 10,
+                'status' => "active",
+                'price' => 50000,
+                'cat_id' => 1,
+            ];
+        $newStock = -10;
+        DB::beginTransaction();
+        try {
+            $product->create($newProductData);
+            $newProduct = $product->where("title", "hello")->first();
+            $status = $newUser->update(['stock' => $newStock]);
+        } catch (Throwable $e) {
+            $this->assertTrue(true);
+        }
+        DB::rollBack();
+    }
+
+    //Test product update with price negative
+    public function test_UpdatePriceNegative()
+    {
+        $product = new Product();
+        $newProductData =
+            [
+                'title' => "hello",
+                'slug' => "hello",
+                'summary' => "hello",
+                'description' => "hello",
+                'photo' => "https://via.placeholder.com/640x480.png/00ff77?text=animals+eos",
+                'stock' => 10,
+                'status' => "active",
+                'price' => 50000,
+                'cat_id' => 1,
+            ];
+        $newPrice = -50000;
+        DB::beginTransaction();
+        try {
+            $product->create($newProductData);
+            $newProduct = $product->where("title", "hello")->first();
+            $status = $newUser->update(['price' => $newPrice]);
         } catch (Throwable $e) {
             $this->assertTrue(true);
         }

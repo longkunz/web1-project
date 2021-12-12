@@ -2905,7 +2905,10 @@ ul {
     padding: 0;
   }
 }
-
+.banner_part .banner_img img {
+  width: 640px;
+  height: 480px;
+}
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 135, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_banner.scss */
   .banner_part .banner_img img {
@@ -2913,7 +2916,6 @@ ul {
     float: right;
   }
 }
-
 /**************** hero part css end ****************/
 
 /**************** service_part css start ****************/
